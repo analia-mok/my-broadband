@@ -1,0 +1,21 @@
+name: my-broadband
+recipe: laravel
+config:
+  webroot: public
+  php: '8.0'
+  via: nginx
+  cache: redis
+  composer_version: 2-latest
+
+services:
+  node:
+    type: node:14
+  mailhog:
+    type: mailhog:v1.0.0
+    portforward: true
+    hogfrom:
+      - appserver
+
+tooling:
+  npm:
+    service: node
