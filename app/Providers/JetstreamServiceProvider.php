@@ -50,19 +50,39 @@ class JetstreamServiceProvider extends ServiceProvider
     protected function configurePermissions()
     {
         // Jetstream::defaultApiTokenPermissions(['read']);
+        // TODO: Create a support rep team.
 
         // TODO: Will become a team role for customer support side.
+        // Will be responsible for all support reps.
         Jetstream::role('admin', __('Administrator'), [
             'create',
             'read',
             'update',
             'delete',
+            'customer:read',
         ])->description(__('Administrator users can perform any action.'));
 
-        Jetstream::role('editor', __('Editor'), [
+        Jetstream::role('support', __('Support Specialist'), [
             'read',
             'create',
             'update',
-        ])->description(__('Editor users have the ability to read, create, and update.'));
+            'customer:read',
+        ])->description(__('Customer support specialist can access customer information'));
+
+        // Customer Roles.
+        Jetstream::role('account_owner', __('Account Owner'), [
+            'customer:read',
+            'customer:update',
+        ])->description(__('Account Owners are the primary account holder'));
+
+        Jetstream::role('account_manager', __('Account Manager'), [
+            'customer:read',
+            'customer:update',
+        ])->description(__('Account Managers can manager other account members'));
+
+        Jetstream::role('account_member', __('Account Member'), [
+            'customer:read',
+            'customer:update',
+        ])->description(__('Account Members only have read-only permissions within the team. They can still manage their own profile settings.'));
     }
 }
