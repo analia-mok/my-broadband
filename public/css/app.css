@@ -12581,6 +12581,10 @@ select {
   flex: 1 1 0%;
 }
 
+.flex-100 {
+  flex: 1 1 100%;
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }
@@ -44552,6 +44556,10 @@ select {
     flex: 1 1 0%;
   }
 
+  .sm\:flex-100 {
+    flex: 1 1 100%;
+  }
+
   .sm\:flex-auto {
     flex: 1 1 auto;
   }
@@ -76443,6 +76451,10 @@ select {
 
   .md\:flex-1 {
     flex: 1 1 0%;
+  }
+
+  .md\:flex-100 {
+    flex: 1 1 100%;
   }
 
   .md\:flex-auto {
@@ -108338,6 +108350,10 @@ select {
     flex: 1 1 0%;
   }
 
+  .lg\:flex-100 {
+    flex: 1 1 100%;
+  }
+
   .lg\:flex-auto {
     flex: 1 1 auto;
   }
@@ -140231,6 +140247,10 @@ select {
     flex: 1 1 0%;
   }
 
+  .xl\:flex-100 {
+    flex: 1 1 100%;
+  }
+
   .xl\:flex-auto {
     flex: 1 1 auto;
   }
@@ -172122,6 +172142,10 @@ select {
 
   .\32xl\:flex-1 {
     flex: 1 1 0%;
+  }
+
+  .\32xl\:flex-100 {
+    flex: 1 1 100%;
   }
 
   .\32xl\:flex-auto {
