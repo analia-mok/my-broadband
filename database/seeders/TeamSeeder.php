@@ -25,6 +25,7 @@ class TeamSeeder extends Seeder
      */
     public function run()
     {
+        // For dev only. Might move creds to env file.
         $result = User::insert([
             'name' => 'superadmin',
             'email' => 'superadmin@example.com',
