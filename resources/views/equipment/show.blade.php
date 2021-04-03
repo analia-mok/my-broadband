@@ -22,6 +22,11 @@
               </th>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
+              @empty($devices)
+                <tr>
+                  <td colspan="6" class="px-6 py-4 whitespace-nowrap">{{ __('No Devices Found') }}</td>
+                </tr>
+              @endempty
               @foreach($devices as $device)
                 <tr>
                   <td class="px-6 py-4 whitespace-nowrap">{{ $device->name }}</td>
