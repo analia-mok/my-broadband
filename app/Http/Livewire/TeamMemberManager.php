@@ -14,9 +14,10 @@ class TeamMemberManager extends LivewireTeamMemberManager
      */
     public function getRolesProperty()
     {
-        // TODO: Will probably switch to permission check if current user
-        // can create certain users.
-        return [];//array_values(Jetstream::$roles);
+        // @todo Will consider overriding/redefining default routes
+        // so that i can control this particular page later.
+        // @see https://github.com/laravel/jetstream/pull/67
+        return array_values(Jetstream::$roles);
     }
 
     /**
