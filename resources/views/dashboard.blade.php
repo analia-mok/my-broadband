@@ -7,8 +7,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                Insert Stuff
+            <div class="bg-white shadow-xl sm:rounded-lg p-8">
+                <ul class="list-disc">
+                    <li><a href="/my-equipment" class="text-blue-500 underline">My Equipment</a></li>
+                </ul>
             </div>
         </div>
     </div>

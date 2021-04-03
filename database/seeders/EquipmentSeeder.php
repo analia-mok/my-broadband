@@ -33,5 +33,10 @@ class EquipmentSeeder extends Seeder
             ->for($supportRepTeam)
             ->isInternet()
             ->create();
+
+        Equipment::factory()
+            ->for($supportRepTeam)
+            ->isInternet()
+            ->create();
     }
 }

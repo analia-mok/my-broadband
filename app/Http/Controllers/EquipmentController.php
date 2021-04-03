@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EquipmentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('verified');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,13 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        //
+        /** @var \App\Models\Team $currentTeam */
+        $currentTeam = Auth::user()->currentTeam;
+        $allEquipment = $currentTeam->equipmentGroupedByType();
+
+        return view('equipment.show', [
+            'equipmentGroups' => $allEquipment,
+        ]);
     }
 
     /**
@@ -24,7 +38,7 @@ class EquipmentController extends Controller
      */
     public function create()
     {
-        //
+        //@todo available only to support rep admins.
     }
 
     /**
@@ -35,7 +49,7 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //@todo available only to support rep admins.
     }
 
     /**
@@ -46,7 +60,7 @@ class EquipmentController extends Controller
      */
     public function show(Equipment $equipment)
     {
-        //
+        //@todo available only to support rep admins.
     }
 
     /**
@@ -57,7 +71,7 @@ class EquipmentController extends Controller
      */
     public function edit(Equipment $equipment)
     {
-        //
+        //@todo available only to support rep admins.
     }
 
     /**
@@ -69,7 +83,7 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, Equipment $equipment)
     {
-        //
+        //@todo available only to support rep admins.
     }
 
     /**
@@ -80,6 +94,6 @@ class EquipmentController extends Controller
      */
     public function destroy(Equipment $equipment)
     {
-        //
+        //@todo available only to support rep admins.
     }
 }

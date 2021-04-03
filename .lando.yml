@@ -24,6 +24,9 @@ tooling:
   npm:
     service: node
   setup:
-    - composer install
-    - php artisan key:generate
-    - php artisan storage:link
+    service: appserver
+    cmd:
+      - composer install
+      - php artisan migrate --seed
+      - php artisan key:generate
+      - php artisan storage:link

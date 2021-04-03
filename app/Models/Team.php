@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\EquipmentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
@@ -41,4 +42,23 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    /**
+     * Retrieves all equipment owned by current account.
+     */
+    public function equipment()
+    {
+        return $this->hasMany(Equipment::class);
+    }
+
+    public function equipmentGroupedByType()
+    {
+        $equipment = $this->equipment()->get();
+
+        $grouped = $equipment->groupBy(function (Equipment $item, $key) {
+            return $item->type->value;
+        });
+
+        return $grouped->all();
+    }
 }
