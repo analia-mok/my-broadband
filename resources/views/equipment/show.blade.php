@@ -1,46 +1,44 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('My Equipment') }}
-    </h2>
+    <x-headings.h2>{{ __('My Equipment') }}</x-headings.h2>
   </x-slot>
 
   <div>
-    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 space-y-6">
       @foreach($equipmentGroups as $groupName => $devices)
-        <h3 class="text-gray-800 leading-tight font-semibold text-lg mb-4">{{ $groupName }}</h3>
-        <div class="mb-8 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-indigo-600">
-              <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wide">{{ __('Name') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wide">{{ __('Serial Number') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wide">{{ __('Device Address') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wide">{{ __('Make') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wide">{{ __('Model') }}</th>
-              <th scope="col" class="relative px-6 py-3">
+        <div>
+          <x-headings.h3 class="mb-4">{{ $groupName }}</x-headings.h3>
+          <x-table class="min-w-full">
+            <x-slot name="header">
+              <x-table.header>{{ __('Name') }}</x-table.header>
+              <x-table.header>{{ __('Serial Number') }}</x-table.header>
+              <x-table.header>{{ __('Device Address') }}</x-table.header>
+              <x-table.header>{{ __('Make') }}</x-table.header>
+              <x-table.header>{{ __('Model') }}</x-table.header>
+              <x-table.header class="relative">
                 <span class="sr-only">{{ __('Reset') }}</span>
-              </th>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+              </x-table.header>
+            </x-slot>
+            <x-slot name="body">
               @empty($devices)
                 <tr>
-                  <td colspan="6" class="px-6 py-4 whitespace-nowrap">{{ __('No Devices Found') }}</td>
+                  <x-table.cell colspan="6">{{ __('No Devices Found') }}</x-table.cell>
                 </tr>
               @endempty
               @foreach($devices as $device)
                 <tr>
-                  <td class="px-6 py-4 whitespace-nowrap">{{ $device->name }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap">{{ $device->serial_number }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap">{{ $device->device_address }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap">{{ $device->make }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap">{{ $device->model }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-right font-medium">
-                    <a href="#" class="text-purple-600 hover:text-purple-900">{{ __('Reset') }}</a>
-                  </td>
+                  <x-table.cell>{{ $device->name }}</x-table.cell>
+                  <x-table.cell>{{ $device->serial_number }}</x-table.cell>
+                  <x-table.cell>{{ $device->device_address }}</x-table.cell>
+                  <x-table.cell>{{ $device->make }}</x-table.cell>
+                  <x-table.cell>{{ $device->model }}</x-table.cell>
+                  <x-table.cell class="text-right font-medium">
+                    <a href="#" class="text-blue-400 hover:text-blue-900">{{ __('Reset') }}</a>
+                  </x-table.cell>
                 </tr>
               @endforeach
-            </tbody>
-          </table>
+            </x-slot>
+          </x-table>
         </div>
       @endforeach
     </div>

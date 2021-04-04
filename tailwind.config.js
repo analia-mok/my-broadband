@@ -10,9 +10,6 @@ module.exports = {
 
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
             flex: {
                 100: '1 1 100%'
             }
