@@ -18,8 +18,16 @@ class Equipment extends Model
         'name', 'type', 'serial_number', 'device_address', 'make', 'model', 'status',
     ];
 
+    public static $permissions = [
+        'create' => 'equipment:create',
+        'read' => 'equipment:read',
+        'delete' => 'equipment:delete',
+        'edit' => 'equipment:edit',
+    ];
+
     public function team()
     {
         return $this->belongsTo(Team::class);
     }
+
 }

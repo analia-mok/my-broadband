@@ -13,6 +13,7 @@ class EquipmentController extends Controller
     {
         $this->middleware('auth:sanctum');
         $this->middleware('verified');
+        // @todo add middleware or gate check to all routes except for index.
     }
 
     /**

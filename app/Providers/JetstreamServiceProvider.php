@@ -9,6 +9,7 @@ use App\Actions\Jetstream\DeleteUser;
 use App\Actions\Jetstream\InviteTeamMember;
 use App\Actions\Jetstream\RemoveTeamMember;
 use App\Actions\Jetstream\UpdateTeamName;
+use App\Models\Equipment;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 
@@ -59,14 +60,15 @@ class JetstreamServiceProvider extends ServiceProvider
             'read',
             'update',
             'delete',
-            'customer:read',
+            'support',
+            ...array_values(Equipment::$permissions),
         ])->description(__('Administrator users can perform any action.'));
 
         Jetstream::role('support', __('Support Specialist'), [
             'read',
             'create',
             'update',
-            'customer:read',
+            'support',
         ])->description(__('Customer support specialist can access customer information'));
 
         // Customer Roles.

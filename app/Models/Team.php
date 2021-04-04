@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\EquipmentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
