@@ -10,10 +10,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
+    Route::get('/', fn() => view('dashboard'))->name('dashboard');
 
     // Equipment Management - User Facing.
     Route::get('/my-equipment', [EquipmentController::class, 'index'])->name('equipment');
@@ -23,5 +20,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => 'admin'], function () {
     Route::get('/', fn() => view('admin-dashboard'))->name('admin.dashboard');
 
+    Route::get('/equipment', fn() => view('equipment.admin-index'))->name('equipment.admin');
     Route::get('/equipment/add', [EquipmentController::class, 'create'])->name('equipment.add');
 });

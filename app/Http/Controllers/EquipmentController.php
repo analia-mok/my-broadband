@@ -25,7 +25,7 @@ class EquipmentController extends Controller
         $currentTeam = Auth::user()->currentTeam;
         $allEquipment = $currentTeam->equipmentGroupedByType();
 
-        return view('equipment.show', [
+        return view('equipment.index', [
             'equipmentGroups' => $allEquipment,
         ]);
     }
