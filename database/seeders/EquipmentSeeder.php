@@ -20,19 +20,19 @@ class EquipmentSeeder extends Seeder
         $supportRepTeam = Team::find(1);
 
         Equipment::factory()
-            ->count(15)
+            ->count(10)
             ->for($supportRepTeam)
             ->isVoice()
             ->create();
 
         Equipment::factory()
-            ->count(15)
+            ->count(10)
             ->for($supportRepTeam)
             ->isVideo()
             ->create();
 
         Equipment::factory()
-            ->count(20)
+            ->count(10)
             ->for($supportRepTeam)
             ->isInternet()
             ->create();
