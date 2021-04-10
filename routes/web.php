@@ -15,13 +15,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     })->name('dashboard');
 
 
-    // Admin/Support Specialist Admin Dashboard.
-    // @todo restrict to those with the support permission.
-    Route::get('/admin', function () {
-        return view('admin-dashboard');
-    })->name('admin.dashboard');
+    // Equipment Management - User Facing.
+    Route::get('/my-equipment', [EquipmentController::class, 'index'])->name('equipment');
 });
 
-// Equipment Management.
-Route::get('/my-equipment', [EquipmentController::class, 'index'])->name('equipment');
-Route::get('/admin/equipment/add', [EquipmentController::class, 'create'])->name('equipment.add');
+
+Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => 'admin'], function () {
+    Route::get('/', fn() => view('admin-dashboard'))->name('admin.dashboard');
+
+    Route::get('/equipment/add', [EquipmentController::class, 'create'])->name('equipment.add');
+});

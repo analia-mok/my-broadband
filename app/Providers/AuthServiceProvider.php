@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Models\Equipment;
 use App\Models\Team;
+use App\Models\User;
 use App\Policies\EquipmentPolicy;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
-        // Equipment::class => EquipmentPolicy::class, // @todo implement.
+        Equipment::class => EquipmentPolicy::class,
     ];
 
     /**
@@ -29,6 +31,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('support-team', function (User $user, Team $team) {
+            return $user->hasTeamPermission($team, 'support');
+        });
     }
 }

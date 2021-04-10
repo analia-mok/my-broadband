@@ -16,7 +16,7 @@ services:
     hogfrom:
       - appserver
   appserver:
-    type: php
+    type: php:8.0
     build:
       - php artisan storage:link
 

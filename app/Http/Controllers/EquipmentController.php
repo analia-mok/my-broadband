@@ -11,8 +11,6 @@ class EquipmentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
-        $this->middleware('verified');
         // @todo add middleware or gate check to all routes except for index.
     }
 
@@ -85,6 +83,9 @@ class EquipmentController extends Controller
     public function update(Request $request, Equipment $equipment)
     {
         //@todo available only to support rep admins.
+        if ($request->user()->cannot('update', $equipment)) {
+            abort(403);
+        }
     }
 
     /**

@@ -15,11 +15,11 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    {{-- @if(App\Facades\TeamPermissions::currentUserHasTeamPermission('support')) --}}
+
                     @php
                     $team = Auth::user()->currentTeam;
                     @endphp
-                    @if(Gate::check('support', $team))
+                    @if(Gate::check('support-team', $team))
                         <x-jet-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
                             {{ __('Admin') }}
                         </x-jet-nav-link>

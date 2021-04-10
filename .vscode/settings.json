@@ -1,3 +1,5 @@
 {
-  "css.validate": false
+  "intelephense.environment.phpVersion": "8.0.2",
+  "phpcs.enable": true,
+  "phpcs.standard": "PSR2"
 }
