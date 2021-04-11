@@ -27,9 +27,9 @@ class TeamSeeder extends Seeder
     {
         // For dev only. Might move creds to env file.
         $result = User::insert([
-            'name' => 'superadmin',
-            'email' => 'superadmin@example.com',
-            'password' => Hash::make('password123'),
+            'name' => env('DEFAULT_USERNAME', 'superadmin'),
+            'email' => env('DEFAULT_USER_EMAIL', 'superadmin@example.com'),
+            'password' => Hash::make(env('DEFAULT_PASSWORD', 'password123')),
             'current_team_id' => 1,
         ]);
 

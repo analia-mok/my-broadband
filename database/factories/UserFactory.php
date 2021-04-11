@@ -61,4 +61,19 @@ class UserFactory extends Factory
             'ownedTeams'
         );
     }
+
+    public function isAccountOwner()
+    {
+        // @todo
+    }
+
+    public function isAccountManager()
+    {
+        // @todo
+    }
+
+    public function isAccountMember()
+    {
+        // @todo
+    }
 }
