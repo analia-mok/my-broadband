@@ -11,6 +11,13 @@ class EquipmentTable extends Component
 {
     use WithPagination;
 
+    /**
+     * The component's state.
+     *
+     * @var array
+     */
+    public $state = [];
+
     public $serialNumber = '';
 
     public $make = '';
@@ -30,9 +37,14 @@ class EquipmentTable extends Component
         'selectedDeviceType' => ['except' => ''],
     ];
 
+    public $showEditForm = false;
+
+    public $currentDevice = null;
+
     public function mount()
     {
         $this->deviceTypes = EquipmentType::toArray();
+        $this->showEditForm = false;
     }
 
     public function render()
@@ -52,5 +64,21 @@ class EquipmentTable extends Component
         $this->model = '';
         $this->make = '';
         $this->selectedDeviceType = '';
+    }
+
+    public function openEquipmentEditFormModal(Equipment $equipment)
+    {
+        // $this->dispatchBrowserEvent('equipment-edit-form-open');
+        $this->showEditForm = true;
+    }
+
+    public function toggleShowEditForm()
+    {
+        $this->showEditForm = false;
+    }
+
+    public function submit()
+    {
+        // @todo
     }
 }

@@ -67,7 +67,9 @@
                     <x-table.cell>{{ $equipment->make }}</x-table.cell>
                     <x-table.cell>{{ $equipment->model }}</x-table.cell>
                     <x-table.cell class="text-right font-medium">
-                        <a href="#" class="text-blue-400 hover:text-blue-900">{{ __('Edit') }}</a>
+                        <button type="button" wire:click="openEquipmentEditFormModal({{ $equipment }})" class="text-blue-400 hover:text-blue-900">
+                            {{ __('Edit') }}
+                        </button>
                     </x-table.cell>
                 </tr>
             @endforeach
@@ -77,4 +79,28 @@
     <div class="pt-8 pb-16">
         {{ $equipmentItems->links() }}
     </div>
+
+    <x-form-modal wire:model="showEditForm">
+        <x-slot name="title">{{ __('Edit Device') }}</x-slot>
+        <x-slot name="form">
+            <div>
+                <x-jet-label for="editSerialNumber" value="{{ __('Serial Number') }}" />
+                <x-jet-input type="text" name="editSerialNumber" id="editSerialNumber" />
+            </div>
+        </x-slot>
+
+        <x-slot name="actions">
+            <button wire:click="toggleShowEditForm">{{ __('Cancel') }}</button>
+
+            <x-jet-action-message class="mr-3" on="saved">
+                {{ __('Saved.') }}
+            </x-jet-action-message>
+
+            <x-jet-button wire:loading.attr="disabled">
+                {{ __('Save') }}
+            </x-jet-button>
+        </x-slot>
+    </x-form-modal>
+
 </div>
+
