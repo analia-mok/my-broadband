@@ -7,9 +7,9 @@
       </div>
     </div>
 
-    <div class="mt-4">
+    <div>
       <form wire:submit.prevent="submit">
-        <div class="px-4 py-5 bg-white sm:p-6">
+        <div class="px-4 py-5 bg-white sm:p-6 grid grid-cols-2 gap-4">
           {{ $form }}
         </div>
 

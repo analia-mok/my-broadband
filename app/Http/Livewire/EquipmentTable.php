@@ -69,12 +69,14 @@ class EquipmentTable extends Component
     public function openEquipmentEditFormModal(Equipment $equipment)
     {
         // $this->dispatchBrowserEvent('equipment-edit-form-open');
+        $this->currentDevice = $equipment;
         $this->showEditForm = true;
     }
 
     public function toggleShowEditForm()
     {
         $this->showEditForm = false;
+        $this->currentDevice = null;
     }
 
     public function submit()

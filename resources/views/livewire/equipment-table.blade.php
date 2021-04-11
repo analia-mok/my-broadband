@@ -60,8 +60,13 @@
                 </tr>
             @endempty
             @foreach($equipmentItems as $equipment)
-                <tr>
-                    <x-table.cell>{{ $equipment->name }}</x-table.cell>
+                <tr class="group">
+                    <x-table.cell>
+                        <p class="text-indigo-500">{{ $equipment->name }}</p>
+                        <span class="inline-block mt-2 text-xs uppercase text-gray-800 font-medium">
+                            Last Updated: {{ $equipment->updated_at->format('M d, Y H:i:s a') }}
+                        </span>
+                    </x-table.cell>
                     <x-table.cell>{{ $equipment->serial_number }}</x-table.cell>
                     <x-table.cell>{{ $equipment->device_address }}</x-table.cell>
                     <x-table.cell>{{ $equipment->make }}</x-table.cell>
@@ -83,10 +88,29 @@
     <x-form-modal wire:model="showEditForm">
         <x-slot name="title">{{ __('Edit Device') }}</x-slot>
         <x-slot name="form">
-            <div>
-                <x-jet-label for="editSerialNumber" value="{{ __('Serial Number') }}" />
-                <x-jet-input type="text" name="editSerialNumber" id="editSerialNumber" />
-            </div>
+            @if($currentDevice)
+                <div>
+                    <x-jet-label for="editName" value="{{ __('Name') }}" />
+                    <x-jet-input class="w-full" type="text" name="editName" id="editName" value="{{ $currentDevice->name }}" />
+                </div>
+                <div></div>
+                <div>
+                    <x-jet-label for="editSerialNumber" value="{{ __('Serial Number') }}" />
+                    <x-jet-input class="w-full" type="text" name="editSerialNumber" id="editSerialNumber" value="{{ $currentDevice->serial_number }}" />
+                </div>
+                <div>
+                    <x-jet-label for="editDeviceAddress" value="{{ __('Device Address') }}" />
+                    <x-jet-input class="w-full" type="text" name="editDeviceAddress" id="editDeviceAddress" value="{{ $currentDevice->device_address }}" />
+                </div>
+                <div>
+                    <x-jet-label for="editMake" value="{{ __('Make') }}" />
+                    <x-jet-input class="w-full" type="text" name="editMake" id="editMake" value="{{ $currentDevice->make }}" />
+                </div>
+                <div>
+                    <x-jet-label for="editModel" value="{{ __('Model') }}" />
+                    <x-jet-input class="w-full" type="text" name="editModel" id="editModel" value="{{ $currentDevice->model }}" />
+                </div>
+            @endif
         </x-slot>
 
         <x-slot name="actions">
