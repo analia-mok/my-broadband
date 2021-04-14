@@ -89,40 +89,8 @@
         <x-slot name="title">{{ __('Edit Device') }}</x-slot>
         <x-slot name="form">
             @if($currentDevice)
-                <div>
-                    <x-jet-label for="editName" value="{{ __('Name') }}" />
-                    <x-jet-input class="w-full" type="text" name="editName" id="editName" value="{{ $currentDevice->name }}" />
-                </div>
-                <div></div>
-                <div>
-                    <x-jet-label for="editSerialNumber" value="{{ __('Serial Number') }}" />
-                    <x-jet-input class="w-full" type="text" name="editSerialNumber" id="editSerialNumber" value="{{ $currentDevice->serial_number }}" />
-                </div>
-                <div>
-                    <x-jet-label for="editDeviceAddress" value="{{ __('Device Address') }}" />
-                    <x-jet-input class="w-full" type="text" name="editDeviceAddress" id="editDeviceAddress" value="{{ $currentDevice->device_address }}" />
-                </div>
-                <div>
-                    <x-jet-label for="editMake" value="{{ __('Make') }}" />
-                    <x-jet-input class="w-full" type="text" name="editMake" id="editMake" value="{{ $currentDevice->make }}" />
-                </div>
-                <div>
-                    <x-jet-label for="editModel" value="{{ __('Model') }}" />
-                    <x-jet-input class="w-full" type="text" name="editModel" id="editModel" value="{{ $currentDevice->model }}" />
-                </div>
+                @livewire('forms.equipment-form', ['equipment' => $currentDevice], key($currentDevice->serial_number))
             @endif
-        </x-slot>
-
-        <x-slot name="actions">
-            <button wire:click="toggleShowEditForm">{{ __('Cancel') }}</button>
-
-            <x-jet-action-message class="mr-3" on="saved">
-                {{ __('Saved.') }}
-            </x-jet-action-message>
-
-            <x-jet-button wire:loading.attr="disabled">
-                {{ __('Save') }}
-            </x-jet-button>
         </x-slot>
     </x-form-modal>
 

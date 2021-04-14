@@ -41,6 +41,8 @@ class EquipmentTable extends Component
 
     public $currentDevice = null;
 
+    public $disabled = false;
+
     public function mount()
     {
         $this->deviceTypes = EquipmentType::toArray();
@@ -76,11 +78,6 @@ class EquipmentTable extends Component
     public function toggleShowEditForm()
     {
         $this->showEditForm = false;
-        $this->currentDevice = null;
-    }
-
-    public function submit()
-    {
-        // @todo
+        // $this->currentDevice = null;
     }
 }

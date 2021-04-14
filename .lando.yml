@@ -28,8 +28,8 @@ tooling:
     service: appserver
     cmd:
       - composer install
-      - php artisan migrate --seed
       - php artisan key:generate
+      - php artisan migrate --seed
       - php artisan storage:link
 
   xdebug-on:

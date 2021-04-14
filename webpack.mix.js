@@ -18,6 +18,8 @@ mix.js('resources/js/app.js', 'public/js')
         require('autoprefixer'),
     ]);
 
+mix.disableNotifications();
+
 if (mix.inProduction()) {
     mix.version();
 }
