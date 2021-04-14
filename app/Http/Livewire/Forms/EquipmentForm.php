@@ -47,14 +47,9 @@ class EquipmentForm extends Component
         $this->equipment->save();
         $this->disabled = false;
 
-        // @fixme
+        $this->emit('closeEditModal');
+
         session()->flash('flash.banner', 'Saved');
         session()->flash('flash.bannerStyle', 'success');
-    }
-
-    public function toggleShowEditForm()
-    {
-        $this->showModal = false;
-        // @todo switch to browser event.
     }
 }

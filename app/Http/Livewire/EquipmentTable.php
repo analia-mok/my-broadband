@@ -37,6 +37,10 @@ class EquipmentTable extends Component
         'selectedDeviceType' => ['except' => ''],
     ];
 
+    protected $listeners = [
+        'closeEditModal' => 'toggleShowEditForm',
+    ];
+
     public $showEditForm = false;
 
     public $currentDevice = null;
@@ -66,11 +70,13 @@ class EquipmentTable extends Component
         $this->model = '';
         $this->make = '';
         $this->selectedDeviceType = '';
+
+        session()->flash('flash.banner', 'Reset');
+        session()->flash('flash.bannerStyle', 'success');
     }
 
     public function openEquipmentEditFormModal(Equipment $equipment)
     {
-        // $this->dispatchBrowserEvent('equipment-edit-form-open');
         $this->currentDevice = $equipment;
         $this->showEditForm = true;
     }
@@ -78,6 +84,5 @@ class EquipmentTable extends Component
     public function toggleShowEditForm()
     {
         $this->showEditForm = false;
-        // $this->currentDevice = null;
     }
 }

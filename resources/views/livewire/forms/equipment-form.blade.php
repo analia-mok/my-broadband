@@ -30,7 +30,7 @@
 
     <div class="flex items-center space-x-4 justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
         <p class="mr-auto text-sm">{{ __('Last Updated') }}: {{ $equipment?->updated_at->format('M d, Y H:i:s A') }}</p>
-        <a wire:click="toggleShowEditForm" href="javascript:void(0);">{{ __('Cancel') }}</a>
+        <a wire:click="$emit('closeEditModal')" href="javascript:void(0);">{{ __('Cancel') }}</a>
 
 
         <x-jet-button wire:loading.attr="disabled">
