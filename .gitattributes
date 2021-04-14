@@ -3,3 +3,9 @@
 *.scss linguist-vendored
 *.js linguist-vendored
 CHANGELOG.md export-ignore
+* core.autocrlf false
+*.css text
+*.html text
+*.js text
+*.php text
+*.blade.php text
