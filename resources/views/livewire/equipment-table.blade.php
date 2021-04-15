@@ -1,5 +1,9 @@
 <div class="container mx-auto max-w-6xl">
     <div class="mb-8 flex">
+        @if(session()->has('flash.banner'))
+            {{ session('flash.banner') }}
+        @endif
+
         <div class="flex space-x-4">
             <div>
                 <x-jet-label for="serialNumber" value="{{ __('Serial Number') }}" />

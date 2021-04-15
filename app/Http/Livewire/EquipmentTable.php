@@ -70,9 +70,6 @@ class EquipmentTable extends Component
         $this->model = '';
         $this->make = '';
         $this->selectedDeviceType = '';
-
-        session()->flash('flash.banner', 'Reset');
-        session()->flash('flash.bannerStyle', 'success');
     }
 
     public function openEquipmentEditFormModal(Equipment $equipment)

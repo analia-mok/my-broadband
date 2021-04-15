@@ -5,7 +5,7 @@
             style="display: none;"
             x-show="show && message"
             x-init="
-                document.addEventListener('banner-message', event => {
+                window.addEventListener('banner-message', event => {
                     style = event.detail.style;
                     message = event.detail.message;
                     show = true;

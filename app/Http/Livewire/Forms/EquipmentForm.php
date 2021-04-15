@@ -49,7 +49,8 @@ class EquipmentForm extends Component
 
         $this->emit('closeEditModal');
 
-        session()->flash('flash.banner', 'Saved');
-        session()->flash('flash.bannerStyle', 'success');
+        // session()->flash('flash.banner', 'Saved');
+        // session()->flash('flash.bannerStyle', 'success');
+        // $this->emit('addNotification', ['message' => 'Saved']);
     }
 }
