@@ -18,18 +18,53 @@ class EquipmentTable extends Component
      */
     public $state = [];
 
+    /**
+     * Wire model for serialNumber.
+     *
+     * @var string
+     */
     public $serialNumber = '';
 
+    /**
+     * Wire model for make.
+     *
+     * @var string
+     */
     public $make = '';
 
+    /**
+     * Wire model for model string.
+     *
+     * @var string
+     */
     public $model = '';
 
+    /**
+     * Wire model for currently selectedDeviceType.
+     *
+     * @var string
+     */
     public $selectedDeviceType = '';
 
+    /**
+     * All available device types.
+     *
+     * @var array
+     */
     public $deviceTypes = [];
 
+    /**
+     * Currently selected pagination limit.
+     *
+     * @var integer
+     */
     public $totalShown = 15;
 
+    /**
+     * Exposed query string parameters.
+     *
+     * @var array
+     */
     protected $queryString = [
         'serialNumber' => ['except' => ''],
         'make' => ['except' => ''],
@@ -41,10 +76,25 @@ class EquipmentTable extends Component
         'closeEditModal' => 'toggleShowEditForm',
     ];
 
+    /**
+     * Toggle for displaying edit form modal.
+     *
+     * @var boolean
+     */
     public $showEditForm = false;
 
+    /**
+     * Current device being edited.
+     *
+     * @var \App\Models\Equipment
+     */
     public $currentDevice = null;
 
+    /**
+     * Submit / action button state
+     *
+     * @var boolean
+     */
     public $disabled = false;
 
     public function mount()
