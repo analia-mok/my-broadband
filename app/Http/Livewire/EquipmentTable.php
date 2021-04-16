@@ -122,7 +122,7 @@ class EquipmentTable extends Component
         $this->selectedDeviceType = '';
     }
 
-    public function openEquipmentEditFormModal(Equipment $equipment)
+    public function openEquipmentEditFormModal(Equipment $equipment = null)
     {
         $this->currentDevice = $equipment;
         $this->showEditForm = true;

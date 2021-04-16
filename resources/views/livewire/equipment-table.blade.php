@@ -1,9 +1,16 @@
 <div class="container mx-auto max-w-6xl">
-    <div class="mb-8 flex">
-        @if(session()->has('flash.banner'))
-            {{ session('flash.banner') }}
-        @endif
+    @if(session()->has('flash.banner'))
+        {{ session('flash.banner') }}
+    @endif
 
+    {{-- TODO: Place me into the header --}}
+    <div class="flex mb-8 flex-row-reverse">
+        <x-jet-button type="button" wire:click="openEquipmentEditFormModal">
+            {{ __('Add New') }}
+        </x-jet-button>
+    </div>
+
+    <div class="mb-8 flex">
         <div class="flex space-x-4">
             <div>
                 <x-jet-label for="serialNumber" value="{{ __('Serial Number') }}" />

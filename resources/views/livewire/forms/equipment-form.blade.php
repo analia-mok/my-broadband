@@ -1,4 +1,4 @@
-<form wire:submit.prevent="save">
+<form wire:submit.prevent="{{ $this->saveAction }}">
     <div class="px-4 py-5 bg-white sm:p-6 grid grid-cols-2 gap-4">
         <div>
             @error('equipment.name')<span class="text-red-500 font-medium">{{ $message }}</span>@enderror
@@ -29,7 +29,9 @@
     </div>
 
     <div class="flex items-center space-x-4 justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
-        <p class="mr-auto text-sm">{{ __('Last Updated') }}: {{ $equipment?->updated_at->format('M d, Y H:i:s A') }}</p>
+        @if($equipment)
+            <p class="mr-auto text-sm">{{ __('Last Updated') }}: {{ $equipment?->updated_at?->format('M d, Y H:i:s A') }}</p>
+        @endif
         <x-jet-button type="button" wire:click="$emit('toggleShowEditForm')">{{ __('Cancel') }}</x-jet-button>
 
         <x-jet-button wire:loading.attr="disabled">

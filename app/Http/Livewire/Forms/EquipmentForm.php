@@ -39,6 +39,12 @@ class EquipmentForm extends Component
         return view('livewire.forms.equipment-form');
     }
 
+    public function getSaveActionProperty()
+    {
+        // @todo fix.
+        return isset($this->equipment) && $this->equipment !== null ? 'save' : 'store';
+    }
+
     public function save()
     {
         $this->disabled = true;
