@@ -36,14 +36,13 @@ class TeamSeeder extends Seeder
         if ($result) {
             // Create Support Rep Team.
             $superAdmin = User::find(1);
-            $superAdmin->ownedTeams()->create([
-                // 'user_id' => $superAdmin->id,
+            $superAdmin->switchTeam($team = $superAdmin->ownedTeams()->create([
                 'name' => 'Support Representatives',
                 'personal_team' => false,
-            ]);
+            ]));
 
             // Attach super admin to support rep team.
-            Team::find(1)->users()->attach($superAdmin, [
+            $team->users()->attach($superAdmin, [
                 'role' => 'admin',
             ]);
         }

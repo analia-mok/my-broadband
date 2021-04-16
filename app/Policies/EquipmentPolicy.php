@@ -12,32 +12,22 @@ class EquipmentPolicy
     use HandlesAuthorization;
 
     /**
-     * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\User  $user
-     * @param  string  $ability
-     * @return void|bool
-     */
-    public function before(User $user, $ability)
-    {
-        $currentTeam = $user->currentTeam();
-
-        if ($user->belongsToTeam($currentTeam) && $user->hasTeamRole($currentTeam, 'admin')) {
-            return true;
-        }
-    }
-
-    /**
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User $user
-     * @return mixed
+     * @param \App\Models\Equipment $equipment
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user, Equipment $equipment)
     {
-        $currentTeam = $user->currentTeam();
+        $supportTeam = Team::findOrFail(1);
 
-        return $user->hasTeamPermission($currentTeam, Equipment::$permissions['read']);
+        if ($user->belongsToTeam($supportTeam)) {
+            return true;
+        }
+
+        return $user->belongsToTeam($equipment->team) &&
+               $user->hasTeamPermission($equipment->team, Equipment::$permissions['read']);
     }
 
     /**
@@ -49,22 +39,29 @@ class EquipmentPolicy
      */
     public function view(User $user, Equipment $equipment)
     {
-        $currentTeam = $user->currentTeam();
+        $supportTeam = Team::findOrFail(1);
 
-        return $user->hasTeamPermission($currentTeam, Equipment::$permissions['read']);
+        if ($user->belongsToTeam($supportTeam)) {
+            return true;
+        }
+
+        return $user->belongsToTeam($equipment->team) &&
+               $user->hasTeamPermission($equipment->team, Equipment::$permissions['read']);
     }
 
     /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User $user
+     * @param \App\Models\Equipment $equipment
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, Equipment $equipment)
     {
-        $currentTeam = $user->currentTeam();
+        $supportTeam = Team::findOrFail(1);
 
-        return $user->hasTeamPermission($currentTeam, Equipment::$permissions['create']);
+        return $user->belongsToTeam($supportTeam) &&
+               $user->hasTeamPermission($supportTeam, Equipment::$permissions['create']);
     }
 
     /**
@@ -76,9 +73,10 @@ class EquipmentPolicy
      */
     public function update(User $user, Equipment $equipment)
     {
-        $currentTeam = $user->currentTeam();
+        $supportTeam = Team::findOrFail(1);
 
-        return $user->hasTeamPermission($currentTeam, Equipment::$permissions['edit']);
+        return $user->belongsToTeam($supportTeam) &&
+               $user->hasTeamPermission($supportTeam, Equipment::$permissions['edit']);
     }
 
     /**
@@ -90,9 +88,8 @@ class EquipmentPolicy
      */
     public function delete(User $user, Equipment $equipment)
     {
-        $currentTeam = $user->currentTeam();
-
-        return $user->hasTeamPermission($currentTeam, Equipment::$permissions['delete']);
+        $supportTeam = Team::findOrFail(1);
+        return $user->belongsToTeam($supportTeam) && $user->hasTeamRole($supportTeam, 'admin');
     }
 
     /**

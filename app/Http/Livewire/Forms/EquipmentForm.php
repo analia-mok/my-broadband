@@ -47,10 +47,20 @@ class EquipmentForm extends Component
         $this->equipment->save();
         $this->disabled = false;
 
-        $this->emit('closeEditModal');
+        $this->emit('toggleShowEditForm');
 
         // session()->flash('flash.banner', 'Saved');
         // session()->flash('flash.bannerStyle', 'success');
         // $this->emit('addNotification', ['message' => 'Saved']);
+    }
+
+    public function store()
+    {
+        $this->validate($this->rules + [
+            'equipment.team' => 'required',
+        ]);
+
+        // @todo implement.
+        // Equipment::create();
     }
 }

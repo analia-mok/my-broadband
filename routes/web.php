@@ -20,7 +20,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => 'admin'], function () {
     Route::get('/', fn() => view('admin-dashboard'))->name('admin.dashboard');
 
-    Route::get('/equipment', fn() => view('equipment.admin-index'))->name('equipment.admin');
-    // TODO: Move into modal?
-    Route::get('/equipment/add', [EquipmentController::class, 'create'])->name('equipment.add');
+    Route::get('/equipment', fn() => view('equipment.admin-index'))
+        ->name('equipment.admin');
 });

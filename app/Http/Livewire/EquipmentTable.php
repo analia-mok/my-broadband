@@ -73,7 +73,7 @@ class EquipmentTable extends Component
     ];
 
     protected $listeners = [
-        'closeEditModal' => 'toggleShowEditForm',
+        'toggleShowEditForm' => 'toggleShowEditForm',
     ];
 
     /**

@@ -76,9 +76,11 @@
                     <x-table.cell>{{ $equipment->make }}</x-table.cell>
                     <x-table.cell>{{ $equipment->model }}</x-table.cell>
                     <x-table.cell class="text-right font-medium">
+                        @if(Auth::user()->can('update', $equipment))
                         <button type="button" wire:click="openEquipmentEditFormModal({{ $equipment }})" class="text-blue-400 hover:text-blue-900">
                             {{ __('Edit') }}
                         </button>
+                        @endif
                     </x-table.cell>
                 </tr>
             @endforeach
