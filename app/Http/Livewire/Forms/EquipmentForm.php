@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Forms;
 
+use App\Enums\EquipmentType;
 use App\Models\Equipment;
+use App\Models\Team;
 use Livewire\Component;
 
 class EquipmentForm extends Component
@@ -13,6 +15,8 @@ class EquipmentForm extends Component
      * @var array
      */
     public $state = [];
+
+    public $operation = 'save';
 
     /**
      * Currently editing equipment model.
@@ -25,6 +29,17 @@ class EquipmentForm extends Component
 
     public $disabled = false;
 
+    /**
+     * Available teams to assign equipment to.
+     *
+     * TODO: Make search dropdown.
+     *
+     * @var array
+     */
+    public $teams = [];
+
+    public $deviceTypes = [];
+
     protected $rules = [
         'equipment.name' => 'required',
         'equipment.type' => 'required',
@@ -34,6 +49,27 @@ class EquipmentForm extends Component
         'equipment.model' => 'required',
     ];
 
+    protected $validationAttributes = [
+        'equipment.name' => 'name',
+        'equipment.team' => 'team',
+        'equipment.type' => 'type',
+        'equipment.serial_number' => 'serial number',
+        'equipment.device_address' => 'device address',
+        'equipment.make' => 'make',
+        'equipment.model' => 'model',
+    ];
+
+    public function mount()
+    {
+        $this->teams = Team::all(['id', 'name']);
+        $this->deviceTypes = EquipmentType::toArray();
+
+        if ($this->operation === 'save') {
+            $this->equipment->type = EquipmentType::INTERNET();
+            $this->equipment->team = $this->teams->first()->id;
+        }
+    }
+
     public function render()
     {
         return view('livewire.forms.equipment-form');
@@ -41,8 +77,7 @@ class EquipmentForm extends Component
 
     public function getSaveActionProperty()
     {
-        // @todo fix.
-        return isset($this->equipment) && $this->equipment !== null ? 'save' : 'store';
+        return $this->equipment && $this->operation === 'save' ? 'save' : 'store';
     }
 
     public function save()
@@ -66,7 +101,22 @@ class EquipmentForm extends Component
             'equipment.team' => 'required',
         ]);
 
-        // @todo implement.
-        // Equipment::create();
+        dd($this->equipment);
+
+        $newDevice = Equipment::create([
+            'name' => $this->equipment->name,
+            'type' => $this->equipment->type,
+            'serial_number' => $this->equipment->serial_number,
+            'device_address' => $this->equipment->device_address,
+            'make' => $this->equipment->make,
+            'model' => $this->equipment->model,
+        ]);
+
+
+
+        session()->flash('flash.banner', 'Created!');
+        session()->flash('flash.bannerStyle', 'success');
+
+        return redirect()->route('equipment.admin');
     }
 }

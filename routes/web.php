@@ -20,6 +20,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => 'admin'], function () {
     Route::get('/', fn() => view('admin-dashboard'))->name('admin.dashboard');
 
-    Route::get('/equipment', fn() => view('equipment.admin-index'))
-        ->name('equipment.admin');
+    Route::get('/equipment', fn() => view('equipment.admin-index'))->name('equipment.admin');
+    Route::get('/equipment/create', fn() => view('equipment.create'))->name('equipment.create');
 });

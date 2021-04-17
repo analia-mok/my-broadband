@@ -3,13 +3,6 @@
         {{ session('flash.banner') }}
     @endif
 
-    {{-- TODO: Place me into the header --}}
-    <div class="flex mb-8 flex-row-reverse">
-        <x-jet-button type="button" wire:click="openEquipmentEditFormModal">
-            {{ __('Add New') }}
-        </x-jet-button>
-    </div>
-
     <div class="mb-8 flex">
         <div class="flex space-x-4">
             <div>
@@ -102,7 +95,7 @@
         <x-slot name="title">{{ __('Edit Device') }}</x-slot>
         <x-slot name="form">
             @if($currentDevice)
-                @livewire('forms.equipment-form', ['equipment' => $currentDevice], key($currentDevice->serial_number))
+                @livewire('forms.equipment-form', ['operation' => 'save', 'equipment' => $currentDevice], key($currentDevice->serial_number))
             @endif
         </x-slot>
     </x-form-modal>
