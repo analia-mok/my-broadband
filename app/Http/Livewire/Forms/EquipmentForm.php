@@ -64,6 +64,7 @@ class EquipmentForm extends Component
         $this->teams = Team::all(['id', 'name']);
         $this->deviceTypes = EquipmentType::toArray();
 
+        // @fixme prepopulating doesn't work
         if ($this->operation === 'save') {
             $this->equipment->type = EquipmentType::INTERNET();
             $this->equipment->team = $this->teams->first()->id;
