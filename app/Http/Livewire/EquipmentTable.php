@@ -109,6 +109,7 @@ class EquipmentTable extends Component
             ->search('model', $this->model)
             ->search('make', $this->make)
             ->search('type', $this->selectedDeviceType)
+            ->orderBy('updated_at', 'desc')
             ->paginate($this->totalShown);
 
         return view('livewire.equipment-table', ['equipmentItems' => $equipment]);

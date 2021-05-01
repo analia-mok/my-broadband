@@ -1,5 +1,5 @@
 {
-  "intelephense.environment.phpVersion": "8.0.2",
+  "intelephense.environment.phpVersion": "8.0.5",
   "phpcs.enable": true,
   "phpcs.standard": "PSR2"
 }

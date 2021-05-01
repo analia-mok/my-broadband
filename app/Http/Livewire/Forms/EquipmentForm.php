@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Forms;
 use App\Enums\EquipmentType;
 use App\Models\Equipment;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class EquipmentForm extends Component
@@ -21,7 +22,10 @@ class EquipmentForm extends Component
     /**
      * Currently editing equipment model.
      *
-     * @var Equipment
+     * TODO: Convert to proper instance of equipment.
+     * Gets converted into an array on store.
+     *
+     * @var \App\Models\Equipment
      */
     public $equipment;
 
@@ -63,12 +67,6 @@ class EquipmentForm extends Component
     {
         $this->teams = Team::all(['id', 'name']);
         $this->deviceTypes = EquipmentType::toArray();
-
-        // @fixme prepopulating doesn't work
-        if ($this->operation === 'save') {
-            $this->equipment->type = EquipmentType::INTERNET();
-            $this->equipment->team = $this->teams->first()->id;
-        }
     }
 
     public function render()
@@ -98,24 +96,33 @@ class EquipmentForm extends Component
 
     public function store()
     {
+        $this->equipment['type'] ??= EquipmentType::INTERNET();
+
         $this->validate($this->rules + [
-            'equipment.team' => 'required',
+            'equipment.team_id' => 'required',
         ]);
 
-        dd($this->equipment);
-
-        $newDevice = Equipment::create([
-            'name' => $this->equipment->name,
-            'type' => $this->equipment->type,
-            'serial_number' => $this->equipment->serial_number,
-            'device_address' => $this->equipment->device_address,
-            'make' => $this->equipment->make,
-            'model' => $this->equipment->model,
+        $team = Team::findOrFail($this->equipment['team_id']);
+        $team->equipment()->create([
+            'name' => $this->equipment['name'],
+            'type' => $this->equipment['type'],
+            'serial_number' => $this->equipment['serial_number'],
+            'device_address' => $this->equipment['device_address'],
+            'make' => $this->equipment['make'],
+            'model' => $this->equipment['model'],
+            'team_id' => $this->equipment['team_id'],
         ]);
+        // $newDevice = Equipment::create([
+        //     'name' => $this->equipment['name'],
+        //     'type' => $this->equipment['type'],
+        //     'serial_number' => $this->equipment['serial_number'],
+        //     'device_address' => $this->equipment['device_address'],
+        //     'make' => $this->equipment['make'],
+        //     'model' => $this->equipment['model'],
+        //     'team_id' => $this->equipment['team_id'],
+        // ]);
 
-
-
-        session()->flash('flash.banner', 'Created!');
+        session()->flash('flash.banner', "Created!");
         session()->flash('flash.bannerStyle', 'success');
 
         return redirect()->route('equipment.admin');

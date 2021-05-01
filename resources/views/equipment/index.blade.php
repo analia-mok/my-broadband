@@ -20,11 +20,11 @@
               </x-table.header>
             </x-slot>
             <x-slot name="body">
-              @empty($devices)
+              @if($devices->isEmpty())
                 <tr>
                   <x-table.cell colspan="6">{{ __('No Devices Found') }}</x-table.cell>
                 </tr>
-              @endempty
+              @endif
               @foreach($devices as $device)
                 <tr>
                   <x-table.cell>{{ $device->name }}</x-table.cell>

@@ -1,8 +1,4 @@
 <div class="container mx-auto max-w-6xl">
-    @if(session()->has('flash.banner'))
-        {{ session('flash.banner') }}
-    @endif
-
     <div class="mb-8 flex">
         <div class="flex space-x-4">
             <div>
@@ -58,11 +54,11 @@
             </x-table.header>
         </x-slot>
         <x-slot name="body">
-            @empty($equipmentItems)
+            @if($equipmentItems->isEmpty())
                 <tr>
                     <x-table.cell colspan="6">{{ __('No Devices Found') }}</x-table.cell>
                 </tr>
-            @endempty
+            @endif
             @foreach($equipmentItems as $equipment)
                 <tr class="group">
                     <x-table.cell>

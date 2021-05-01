@@ -12,13 +12,13 @@
 
         @if($operation === 'create')
             <div>
-                <x-jet-label for="team" value="{{ __('Team') }}" />
-                <select name="team"
-                    id="team"
-                    wire:model.debounce.450ms="equipment.team"
+                <x-jet-label for="team_id" value="{{ __('Team') }}" />
+                <select name="team_id"
+                    id="team_id"
+                    wire:model.debounce.450ms="equipment.team_id"
                     class="form-select w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
 
-                    <option value="" disabled selected>Select a team</option>
+                    <option value="" selected>Select a team</option>
 
                     @foreach($teams as $team)
                         <option value="{{ $team->id }}">{{ $team->name }}</option>
