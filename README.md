@@ -5,7 +5,7 @@ Account dashboard for a customer to manage their internet, TV, and phone service
 
 ## Features List
 
-- [ ] Equipment
+- [X] Equipment
 - [ ] Data Usage
 - [ ] Billing
 - [ ] Rewards
