@@ -23,6 +23,8 @@ class EquipmentFactory extends Factory
     public function definition()
     {
         $address = $this->faker->macAddress;
+        $hasUnlimitedData = $this->faker->optional($weight = 0.3, $default = false)->boolean();
+        $maxData = $this->faker->randomNumber(2) * 1000000000; // Some amount of GB.
 
         return [
             'name' => $this->faker->name(),
@@ -31,6 +33,8 @@ class EquipmentFactory extends Factory
             'device_address' => $address,
             'make' => strtoupper($this->faker->bothify('?####')),
             'model' => strtoupper($this->faker->bothify('??####')),
+            'max_data' => $maxData,
+            'has_unlimited_data' => $hasUnlimitedData,
             'status' => true,
         ];
     }

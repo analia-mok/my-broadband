@@ -15,7 +15,8 @@ class Equipment extends Model
     ];
 
     protected $fillable = [
-        'name', 'type', 'serial_number', 'device_address', 'make', 'model', 'status',
+        'name', 'type', 'serial_number', 'device_address',
+        'make', 'model', 'status', 'max_data', 'has_unlimited_data',
     ];
 
     public static $permissions = [

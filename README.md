@@ -7,10 +7,11 @@ Account dashboard for a customer to manage their internet, TV, and phone service
 
 - [X] Equipment
 - [ ] Data Usage
+- [ ] Database index for querying data usage for a device.
 - [ ] Billing
 - [ ] Rewards
 - [ ] Services
 
-### Later
+### Later/Post-MVP
 
 - [ ] Autopopulate a device's address while editing a device's serial number.
