@@ -32,11 +32,13 @@ class EquipmentSeeder extends Seeder
             ->isVideo()
             ->create();
 
+        // @todo Need to determine how to get an entry
+        // for consecutive days - without repeats.
         Equipment::factory()
             ->count(5)
             ->for($supportRepTeam)
             ->isInternet()
-            // ->has(DataUsage::factory()->count(5), 'dataUsage')
+            ->has(DataUsage::factory()->count(10), 'dataUsage')
             ->create();
     }
 }

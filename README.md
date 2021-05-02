@@ -15,3 +15,4 @@ Account dashboard for a customer to manage their internet, TV, and phone service
 ### Later/Post-MVP
 
 - [ ] Autopopulate a device's address while editing a device's serial number.
+- [ ] Look into [iSeed](https://github.com/orangehill/iseed)

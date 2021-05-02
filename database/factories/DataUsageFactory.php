@@ -23,8 +23,12 @@ class DataUsageFactory extends Factory
     public function definition()
     {
         // Generating 1 - 10 MBS of data used in a day.
+        $createdAt = $this->faker->unique()->dateTimeBetween('-2 months');
+
         return [
             'data' => DataUnitConversion::mbToBytes($this->faker->numberBetween(1, 10)),
+            'created_at' => $createdAt,
+            'updated_at' => $createdAt,
         ];
     }
 }
