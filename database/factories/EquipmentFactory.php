@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Enums\EquipmentType;
 use App\Models\Equipment;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Helpers\DataUnitConversionFacade as DataUnitConversion;
 
 class EquipmentFactory extends Factory
 {
@@ -23,8 +24,6 @@ class EquipmentFactory extends Factory
     public function definition()
     {
         $address = $this->faker->macAddress;
-        $hasUnlimitedData = $this->faker->optional($weight = 0.3, $default = false)->boolean();
-        $maxData = $this->faker->randomNumber(2) * 1000000000; // Some amount of GB.
 
         return [
             'name' => $this->faker->name(),
@@ -33,8 +32,6 @@ class EquipmentFactory extends Factory
             'device_address' => $address,
             'make' => strtoupper($this->faker->bothify('?####')),
             'model' => strtoupper($this->faker->bothify('??####')),
-            'max_data' => $maxData,
-            'has_unlimited_data' => $hasUnlimitedData,
             'status' => true,
         ];
     }
@@ -46,12 +43,14 @@ class EquipmentFactory extends Factory
      */
     public function isVoice()
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => EquipmentType::VOICE(),
-                'name' => 'Voice Device',
-            ];
-        });
+        return $this->state(
+            function (array $attributes) {
+                return [
+                    'type' => EquipmentType::VOICE(),
+                    'name' => 'Voice Device',
+                ];
+            }
+        );
     }
 
     /**
@@ -61,12 +60,22 @@ class EquipmentFactory extends Factory
      */
     public function isInternet()
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => EquipmentType::INTERNET(),
-                'name' => 'Internet Device',
-            ];
-        });
+        return $this->state(
+            function (array $attributes) {
+                $hasUnlimitedData = $this->faker->optional($weight = 0.3, $default = false)->boolean();
+                // For now, max data between 5GB to 125GB.
+                // Keep all as increments of 5.
+                $multipleOfFive = $this->faker->numberBetween(1, 25);
+                $maxData = DataUnitConversion::gbToBytes($multipleOfFive * 5);
+
+                return [
+                    'type' => EquipmentType::INTERNET(),
+                    'name' => 'Internet Device',
+                    'max_data' => $maxData,
+                    'has_unlimited_data' => $hasUnlimitedData,
+                ];
+            }
+        );
     }
     /**
      * Indicate that this equipment is video-related.
@@ -75,11 +84,13 @@ class EquipmentFactory extends Factory
      */
     public function isVideo()
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => EquipmentType::VIDEO(),
-                'name' => 'Video Device',
-            ];
-        });
+        return $this->state(
+            function (array $attributes) {
+                return [
+                    'type' => EquipmentType::VIDEO(),
+                    'name' => 'Video Device',
+                ];
+            }
+        );
     }
 }

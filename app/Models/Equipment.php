@@ -30,4 +30,9 @@ class Equipment extends Model
     {
         return $this->belongsTo(Team::class);
     }
+
+    public function dataUsage()
+    {
+        return $this->hasMany(DataUsage::class);
+    }
 }

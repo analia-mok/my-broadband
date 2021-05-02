@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DataUsage;
 use App\Models\Equipment;
 use App\Models\Team;
 use App\Models\User;
@@ -20,21 +21,22 @@ class EquipmentSeeder extends Seeder
         $supportRepTeam = Team::find(1);
 
         Equipment::factory()
-            ->count(10)
+            ->count(2)
             ->for($supportRepTeam)
             ->isVoice()
             ->create();
 
         Equipment::factory()
-            ->count(10)
+            ->count(2)
             ->for($supportRepTeam)
             ->isVideo()
             ->create();
 
         Equipment::factory()
-            ->count(10)
+            ->count(5)
             ->for($supportRepTeam)
             ->isInternet()
+            // ->has(DataUsage::factory()->count(5), 'dataUsage')
             ->create();
     }
 }
