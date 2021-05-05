@@ -18,6 +18,11 @@ services:
   appserver:
     type: php:8.0
     xdebug: true
+    config:
+      php: .vscode/php.ini
+    overrides:
+      environment:
+        PHP_IDE_CONFIG: "serverName=appserver"
     build:
       - php artisan storage:link
 

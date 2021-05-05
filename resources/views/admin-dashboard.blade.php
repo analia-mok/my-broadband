@@ -11,8 +11,6 @@
               <ul class="list-disc">
                 <li><a href="{{ route('equipment.admin') }}" class="text-blue-500 underline">Manage Equipment</a></li>
               </ul>
-
-              @livewire('data-usage-chart')
           </div>
       </div>
   </div>

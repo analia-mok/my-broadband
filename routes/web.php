@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+// Customer-facing routes.
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', fn() => view('dashboard'))->name('dashboard');
 
     // Equipment Management - User Facing.
     Route::get('/my-equipment', [EquipmentController::class, 'index'])->name('equipment');
+
+    Route::get('/my-data', fn() => view('data-usage.index'))->name('data-usage.index');
 });
 
-
+// Admin-only routes.
 Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => 'admin'], function () {
     Route::get('/', fn() => view('admin-dashboard'))->name('admin.dashboard');
 

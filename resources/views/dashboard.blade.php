@@ -9,7 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg p-8">
                 <ul class="list-disc">
-                    <li><a href="/my-equipment" class="text-blue-500 underline">My Equipment</a></li>
+                    <li><a href="{{ route('equipment') }}" class="text-blue-500 underline">My Equipment</a></li>
+                    <li><a href="{{ route('data-usage.index') }}" class="text-blue-500 underline">Data Usage</a></li>
                 </ul>
             </div>
         </div>

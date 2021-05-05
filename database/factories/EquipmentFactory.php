@@ -70,7 +70,7 @@ class EquipmentFactory extends Factory
 
                 return [
                     'type' => EquipmentType::INTERNET(),
-                    'name' => 'Internet Device',
+                    'name' => $this->faker->firstName() . ' - Internet Device',
                     'max_data' => $maxData,
                     'has_unlimited_data' => $hasUnlimitedData,
                 ];
